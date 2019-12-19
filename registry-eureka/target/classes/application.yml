@@ -1,63 +1,63 @@
-#server:
-#  port: 8761
-#eureka:
-#  instance:
-#    hostname: peer1
-#  client:
-#    service-url:
-#      defaultZone: http://peer2:8861/eureka/,http://peer3:8961/eureka/
-#    fetch-registry: false
-#    register-with-eureka: false
-#spring:
-#  application:
-#    name: eureka-server
-#  profiles:
-#    active: peer1
-#
-#---
-#server:
-#  port: 8861
-#eureka:
-#  client:
-#    fetch-registry: false
-#    register-with-eureka: false
-#    service-url:
-#      defaultZone: http://peer1:8761/eureka/,http://peer3:8961/eureka/
-#  instance:
-#    hostname: peer2
-#spring:
-#  profiles: peer2
-#  application:
-#    name: eureka-server
-#
-#---
-#server:
-#  port: 8961
-#eureka:
-#  client:
-#    fetch-registry: false
-#    register-with-eureka: false
-#    service-url:
-#      defaultZone: http://peer1:8761/eureka/,http://peer2:8861/eureka/
-#  instance:
-#    hostname: peer3
-#spring:
-#  profiles: peer3
-#  application:
-#    name: eureka-server
-
-
-# single node
 server:
   port: 8761
+eureka:
+  instance:
+    hostname: peer1
+  client:
+    service-url:
+      defaultZone: http://peer2:8861/eureka/,http://peer3:8961/eureka/
+    fetch-registry: false
+    register-with-eureka: false
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: peer1
+
+---
+server:
+  port: 8861
 eureka:
   client:
     fetch-registry: false
     register-with-eureka: false
+    service-url:
+      defaultZone: http://peer1:8761/eureka/,http://peer3:8961/eureka/
   instance:
-    hostname: peer1
+    hostname: peer2
 spring:
-  profiles:
-    active: peer1
+  profiles: peer2
   application:
     name: eureka-server
+
+---
+server:
+  port: 8961
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://peer1:8761/eureka/,http://peer2:8861/eureka/
+  instance:
+    hostname: peer3
+spring:
+  profiles: peer3
+  application:
+    name: eureka-server
+
+
+# single node
+#server:
+#  port: 8761
+#eureka:
+#  client:
+#    fetch-registry: false
+#    register-with-eureka: false
+#  instance:
+#    hostname: peer1
+#spring:
+#  profiles:
+#    active: peer1
+#  application:
+#    name: eureka-server
