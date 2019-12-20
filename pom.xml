@@ -6,7 +6,8 @@
 	<modules>
 		<module>registry-eureka</module>
         <module>frontend</module>
-    </modules>
+		<module>gateway-zuul</module>
+	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
