@@ -1,4 +1,4 @@
-package com.fred.microstage.gateway.zuul;
+package com.fred.microstage.gateway.zuul.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
