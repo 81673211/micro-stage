@@ -1,4 +1,4 @@
-package com.fred.microstage.frontend.controller;
+package com.fred.microstage.service.user.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

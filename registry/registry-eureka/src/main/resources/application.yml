@@ -1,17 +1,8 @@
-spring:
-  cloud:
-    config:
-      profile: dev
-      discovery:
-        enabled: true
-        service-id: config-server
-
-
 #server:
-#  port: 8761
+#  port: 9101
 #eureka:
 #  instance:
-#    hostname: peer1
+#    hostname: registry-server1
 #  client:
 #    service-url:
 #      defaultZone: http://peer2:8861/eureka/,http://peer3:8961/eureka/
@@ -19,13 +10,13 @@ spring:
 #    register-with-eureka: false
 #spring:
 #  application:
-#    name: eureka-server
+#    name: registry-server
 #  profiles:
 #    active: dev
 
 #---
 #server:
-#  port: 8861
+#  port: 9102
 #eureka:
 #  client:
 #    fetch-registry: false
@@ -33,16 +24,16 @@ spring:
 #    service-url:
 #      defaultZone: http://peer1:8761/eureka/,http://peer3:8961/eureka/
 #  instance:
-#    hostname: peer2
+#    hostname: registry-server2
 #spring:
 #  profiles:
 #    active: dev
 #  application:
-#    name: eureka-server
+#    name: registry-server
 #
 #---
 #server:
-#  port: 8961
+#  port: 9103
 #eureka:
 #  client:
 #    fetch-registry: false
@@ -50,25 +41,25 @@ spring:
 #    service-url:
 #      defaultZone: http://peer1:8761/eureka/,http://peer2:8861/eureka/
 #  instance:
-#    hostname: peer3
+#    hostname: registry-server3
 #spring:
 #  profiles:
 #    active: dev
 #  application:
-#    name: eureka-server
+#    name: registry-server
 
 
 # single node
-#server:
-#  port: 8761
-#eureka:
-#  client:
-#    fetch-registry: false
-#    register-with-eureka: false
-#  instance:
-#    hostname: peer1
-#spring:
-#  profiles:
-#    active: peer1
-#  application:
-#    name: eureka-server
+server:
+  port: 9100
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+  instance:
+    hostname: registry-server1
+spring:
+  profiles:
+    active: dev
+  application:
+    name: registry-server
