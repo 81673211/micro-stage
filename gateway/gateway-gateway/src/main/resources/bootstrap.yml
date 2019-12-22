@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: gateway-gateway
+  profiles:
+    active: dev
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+
+eureka:
+  instance:
+    hostname: gateway-gateway
+  client:
+    service-url:
+      defaultZone: http://registry-server1:9100/eureka/

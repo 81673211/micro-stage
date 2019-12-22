@@ -1,0 +1,23 @@
+server:
+  port: 9301
+
+spring:
+  cloud:
+    gateway:
+      default-filters:
+      routes:
+        - id: user-api
+          uri: lb://SERVICE-USER
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+
+SERVICE-USER:
+  ribbon:
+      listOfServers: localhost:9001, localhost:9002
+      NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
