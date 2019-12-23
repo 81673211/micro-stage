@@ -7,16 +7,12 @@ spring:
       default-filters:
       routes:
         - id: user-api
-          uri: lb://SERVICE-USER
+          uri: lb://service-user
           predicates:
             - Path=/user/**
           filters:
             - StripPrefix=1
 
-SERVICE-USER:
-  ribbon:
-      listOfServers: localhost:9001, localhost:9002
-      NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
 
 logging:
   level:
