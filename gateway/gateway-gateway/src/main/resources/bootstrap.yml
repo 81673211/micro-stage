@@ -3,11 +3,11 @@ spring:
     name: gateway-gateway
   profiles:
     active: dev
-#  cloud:
-#    config:
-#      discovery:
-#        enabled: true
-#        service-id: config-server
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
 
 eureka:
   instance:
