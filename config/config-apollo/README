@@ -1,0 +1,37 @@
+apollo服务端由三个子服务构成，分别是admin-service/config-service/portal.
+
+需要分别部署这三个子服务，其中admin-service & config-service需要区分各个环境，而portal部署一套可以支持多个环境
+
+默认情况下config-service自带了eureka作为注册中心，我将其改为把apollo相关的服务注册到单独部署的eureka上。
+    1. 配置Config Service不启动内置Eureka Server
+        1.1 1.5.0及以上版本
+        为apollo-configservice配置apollo.eureka.server.enabled=false即可，通过bootstrap.yml或-D参数等方式皆可。
+
+        1.2 1.5.0之前的版本
+        修改com.ctrip.framework.apollo.configservice.ConfigServiceApplication，把@EnableEurekaServer改为@EnableEurekaClient
+
+        @EnableEurekaClient
+        @EnableAspectJAutoProxy
+        @EnableAutoConfiguration // (exclude = EurekaClientConfigBean.class)
+        @Configuration
+        @EnableTransactionManagement
+        @PropertySource(value = {"classpath:configservice.properties"})
+        @ComponentScan(basePackageClasses = {ApolloCommonConfig.class,
+            ApolloBizConfig.class,
+            ConfigServiceApplication.class,
+            ApolloMetaServiceConfig.class})
+        public class ConfigServiceApplication {
+          ...
+        }
+
+    2. 修改ApolloConfigDB.ServerConfig表中的eureka.service.url，指向自己的Eureka地址
+        比如自己的Eureka服务地址是1.1.1.1:8761和2.2.2.2:8761，那么就将ApolloConfigDB.ServerConfig表中设置eureka.service.url为：
+
+        http://1.1.1.1:8761/eureka/,http://2.2.2.2:8761/eureka/
+        需要注意的是更改Eureka地址只需要改ApolloConfigDB.ServerConfig表中的eureka.service.url即可，不需要修改meta server地址。
+
+        默认情况下，meta service和config service是部署在同一个JVM进程，所以meta service的地址就是config service的地址，修改Eureka地址时不需要修改meta server地址。
+
+部署admin-service/config-service/portal时，需要修改数据库连接信息。事先需要创建好apollo需要的数据库ApolloConfigDB & ApolloPortalDB
+
+enjoy it!
