@@ -11,7 +11,7 @@ public class UserController {
     @Value("${server.port}")
     private String port;
 
-    @RequestMapping("/profile")
+    @RequestMapping("/user/profile")
     public String getProfile(@RequestParam("name") String name) {
         return String.format("user name : %s, welcome to micro-stage made by fred, port : %s", name, port);
     }

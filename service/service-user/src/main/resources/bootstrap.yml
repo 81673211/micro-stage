@@ -1,16 +1,4 @@
-spring:
-  profiles:
-    active: dev
-  application:
-    name: service-user
-  cloud:
-    config:
-      discovery:
-        enabled: true
-        service-id: config-server
-
-eureka:
-  client:
-    service-url:
-      #      defaultZone: http://registry-server1:9101/eureka/,http://registry-server2:9102/eureka/,http://registry-server3:9103/eureka/
-      defaultZone: http://registry-server1:9100/eureka/
+app:
+  id: micro-stage-service-user
+apollo:
+  meta: http://localhost:8080

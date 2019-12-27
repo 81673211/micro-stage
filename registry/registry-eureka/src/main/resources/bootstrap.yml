@@ -1,4 +1,4 @@
 app:
-  id: micro-stage-gateway-gateway
+  id: micro-stage-registry-eureka
 apollo:
   meta: http://localhost:8080
