@@ -2,3 +2,7 @@ app:
   id: micro-stage-service-user
 apollo:
   meta: http://localhost:8080
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
