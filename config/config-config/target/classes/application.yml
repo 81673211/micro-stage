@@ -1,0 +1,25 @@
+server:
+  port: 9200
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: dev
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/81673211/spring-cloud-config-study
+          search-paths: /micro-stage
+          username:
+          password:
+      label: master
+
+
+eureka:
+  instance:
+    hostname: config-server
+  client:
+    service-url:
+      defaultZone: http://registry-server1:9100/eureka/

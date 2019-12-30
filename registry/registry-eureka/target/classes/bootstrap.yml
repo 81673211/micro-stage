@@ -1,0 +1,8 @@
+app:
+  id: micro-stage-registry-eureka
+apollo:
+  meta: http://localhost:8080
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
