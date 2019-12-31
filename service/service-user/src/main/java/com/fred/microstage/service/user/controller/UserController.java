@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 public class UserController {
 
@@ -13,6 +15,7 @@ public class UserController {
 
     @RequestMapping("/profile")
     public String getProfile(@RequestParam("name") String name) {
+        System.out.println(name);
         return String.format("user name : %s, welcome to micro-stage made by fred, port : %s", name, port);
     }
 }

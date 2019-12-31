@@ -6,3 +6,20 @@ apollo:
     enabled: true
     eagerLoad:
       enabled: true
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-api
+          uri: lb://micro-stage-service-user
+          predicates:
+            - Path=/user/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@userKeyResolver}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
+            - StripPrefix=1
+#        - id: goods-api
