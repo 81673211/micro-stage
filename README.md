@@ -20,8 +20,11 @@ apollo部署说明：config/config-apollo/README
 2019-12-27
     加入apollo更新配置后通知到各个应用 
 
-2019-12-30（进行中）
-    添加gateway的限流
+2019-12-30
+    添加gateway的限流,采用默认提供的令牌桶算法
+    
+2019-12-31 进行中...
+    集成认证授权
 
     
 springcloud脚手架，持续迭代完善中
