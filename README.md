@@ -26,5 +26,8 @@ apollo部署说明：config/config-apollo/README
 2019-12-31 进行中...
     集成认证授权
 
+2020-1-2 进行中...
+    集成open-feign到用户服务 done
+    需要自定义feign配置 ing
     
 springcloud脚手架，持续迭代完善中
