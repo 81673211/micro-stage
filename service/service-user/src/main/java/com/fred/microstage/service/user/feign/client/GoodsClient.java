@@ -3,15 +3,17 @@ package com.fred.microstage.service.user.feign.client;
 import com.fred.microstage.service.goods.request.GoodsFindRequest;
 import com.fred.microstage.service.user.feign.configuration.GoodsClientConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.cloud.openfeign.SpringQueryMap;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @FeignClient(value = "micro-stage-service-goods"
         , configuration = GoodsClientConfiguration.class
 )
 public interface GoodsClient {
 
-    @RequestMapping(value = "/find", method = RequestMethod.POST)
-    String find(@RequestBody GoodsFindRequest goodsFindRequest);
+    /**
+     * '@SpringQueryMap'可以用在消费端而服务端可以不必加@RequestBody
+     */
+    @PostMapping(value = "/find")
+    String find(@SpringQueryMap GoodsFindRequest goodsFindRequest);
 }
