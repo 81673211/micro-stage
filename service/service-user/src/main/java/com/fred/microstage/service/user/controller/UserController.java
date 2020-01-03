@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
 @RestController
 public class UserController {
 
@@ -20,7 +18,6 @@ public class UserController {
 
     @RequestMapping("/profile")
     public String getProfile(@RequestParam("userId") Long userId) {
-        userService.get(userId);
-        return String.format("welcome to micro-stage made by fred, port : %s", port);
+        return userService.findGood(userId);
     }
 }

@@ -1,7 +1,7 @@
 package com.fred.microstage.service.user.service;
 
-import com.fred.microstage.service.user.entity.User;
-import com.fred.microstage.service.user.remote.GoodsClient;
+import com.fred.microstage.service.goods.request.GoodsFindRequest;
+import com.fred.microstage.service.user.feign.client.GoodsClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +11,9 @@ public class UserService {
     @Autowired
     private GoodsClient goodsClient;
 
-    public User get(Long id) {
-        System.out.println(goodsClient.find(id));
-        return null;
+    public String findGood(Long id) {
+        GoodsFindRequest goodsFindRequest = new GoodsFindRequest();
+        goodsFindRequest.setUserId(id);
+        return goodsClient.find(goodsFindRequest);
     }
 }
