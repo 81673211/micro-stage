@@ -4,16 +4,21 @@ import com.fred.microstage.service.goods.request.GoodsFindRequest;
 import com.fred.microstage.service.user.feign.configuration.GoodsClientConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @FeignClient(value = "micro-stage-service-goods"
         , configuration = GoodsClientConfiguration.class
+//        , fallback = Goods
 )
 public interface GoodsClient {
 
     /**
-     * '@SpringQueryMap'可以用在消费端而服务端可以不必加@RequestBody
+     * The OpenFeign @QueryMap annotation provides support for POJOs to be used as GET parameter maps.
+     * Unfortunately, the default OpenFeign QueryMap annotation is incompatible with Spring because it lacks a value property.
+     *
+     * Spring Cloud OpenFeign provides an equivalent @SpringQueryMap annotation,
+     * which is used to annotate a POJO or Map parameter as a query parameter map.
      */
-    @PostMapping(value = "/find")
+    @GetMapping(value = "/find")
     String find(@SpringQueryMap GoodsFindRequest goodsFindRequest);
 }
