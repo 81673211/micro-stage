@@ -30,5 +30,8 @@ apollo部署说明：config/config-apollo/README
 2020-1-2
     集成open-feign到用户服务 done
     需要自定义feign配置
+
+2020-1-3 进行中
+    集成hystrix in feign
     
 springcloud脚手架，持续迭代完善中

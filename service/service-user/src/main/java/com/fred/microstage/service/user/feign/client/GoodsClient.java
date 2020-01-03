@@ -4,11 +4,12 @@ import com.fred.microstage.service.goods.request.GoodsFindRequest;
 import com.fred.microstage.service.user.feign.configuration.GoodsClientConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @FeignClient(value = "micro-stage-service-goods"
         , configuration = GoodsClientConfiguration.class
-//        , fallback = Goods
+        , fallback = GoodsClient.GoodsClientHystrix.class
 )
 public interface GoodsClient {
 
@@ -21,4 +22,13 @@ public interface GoodsClient {
      */
     @GetMapping(value = "/find")
     String find(@SpringQueryMap GoodsFindRequest goodsFindRequest);
+
+    @Component
+    class GoodsClientHystrix implements GoodsClient {
+
+        @Override
+        public String find(GoodsFindRequest goodsFindRequest) {
+            return "something error!";
+        }
+    }
 }
