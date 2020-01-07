@@ -34,4 +34,7 @@ apollo部署说明：config/config-apollo/README
 2020-1-3 进行中
     集成hystrix in feign
     
+2020-1-7 进行中
+    准备集成oauth-server，支持授权码模式、简化模式、密码模式和服务器模式
+    
 springcloud脚手架，持续迭代完善中
