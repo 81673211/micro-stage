@@ -6,5 +6,3 @@ apollo:
     enabled: true
     eagerLoad:
       enabled: true
-
-#        - id: goods-api

@@ -36,5 +36,8 @@ apollo部署说明：config/config-apollo/README
     
 2020-1-7 进行中
     准备集成oauth-server，支持授权码模式、简化模式、密码模式和服务器模式
+
+2020-1-9
+    将github作为oauth-server，已获取到授权码及token，下一步缓存token以及验证OAutherFilter
     
 springcloud脚手架，持续迭代完善中
