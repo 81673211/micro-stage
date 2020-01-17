@@ -1,6 +1,7 @@
 package com.fred.microstage.gateway.gateway.filter.oauth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -14,6 +15,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.net.URI;
 import java.util.List;
 
 @Component
@@ -21,6 +23,9 @@ public class OAuthFilter implements GlobalFilter, Ordered {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Value("${oauth.authorize-code.url.get}")
+    private String oauthAuthorizeCodeUrl;
 
     private AntPathMatcher pathMatcher = new AntPathMatcher();
 
@@ -32,7 +37,8 @@ public class OAuthFilter implements GlobalFilter, Ordered {
         String token = extractToken(exchange.getRequest());
         if (token == null) {
             final ServerHttpResponse response = exchange.getResponse();
-            response.setStatusCode(HttpStatus.UNAUTHORIZED);
+            response.setStatusCode(HttpStatus.SEE_OTHER);
+            response.getHeaders().setLocation(URI.create(oauthAuthorizeCodeUrl));
             return response.setComplete();
         }
         return null;
