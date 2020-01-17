@@ -1,5 +1,7 @@
 package com.fred.microstage.gateway.gateway.filter.oauth;
 
+import com.fred.microstage.cache.CacheConst;
+import com.fred.microstage.cache.redis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -22,7 +24,7 @@ import java.util.List;
 public class OAuthFilter implements GlobalFilter, Ordered {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisService redisService;
 
     @Value("${oauth.authorize-code.url.get}")
     private String oauthAuthorizeCodeUrl;
@@ -36,12 +38,20 @@ public class OAuthFilter implements GlobalFilter, Ordered {
         }
         String token = extractToken(exchange.getRequest());
         if (token == null) {
-            final ServerHttpResponse response = exchange.getResponse();
-            response.setStatusCode(HttpStatus.SEE_OTHER);
-            response.getHeaders().setLocation(URI.create(oauthAuthorizeCodeUrl));
-            return response.setComplete();
+            return authorizeRedirect(exchange);
         }
-        return null;
+        if (redisService.isExist(CacheConst.CACHE_OAUTH_TOKEN + token)) {
+            return chain.filter(exchange);
+        } else {
+            return authorizeRedirect(exchange);
+        }
+    }
+
+    private Mono<Void> authorizeRedirect(ServerWebExchange exchange) {
+        final ServerHttpResponse response = exchange.getResponse();
+        response.setStatusCode(HttpStatus.SEE_OTHER);
+        response.getHeaders().setLocation(URI.create(oauthAuthorizeCodeUrl));
+        return response.setComplete();
     }
 
     private String extractToken(ServerHttpRequest request) {
