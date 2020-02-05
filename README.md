@@ -4,6 +4,7 @@ registry
    - netflix-eureka
 
 config
+   - apollo
    - spring-cloud-config
  
 gateway
@@ -13,6 +14,12 @@ gateway
 service
    - service-user 
    - service-goods (@Deprecate)
+
+oauth
+   - oauth-server(github)
+
+cache
+   - cache-redis
    
 
 弃用config模块，registry & gateway & service 均使用apollo作为配置中心（1.5.0）
